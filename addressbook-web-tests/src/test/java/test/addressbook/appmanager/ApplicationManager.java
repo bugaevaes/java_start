@@ -20,6 +20,7 @@ public class ApplicationManager {
 
     public ApplicationManager(String browser) {
         this.browser = browser;
+
     }
 
     public void init() {
