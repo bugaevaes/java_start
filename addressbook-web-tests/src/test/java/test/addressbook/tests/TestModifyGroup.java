@@ -1,6 +1,5 @@
 package test.addressbook.tests;
 
-import org.omg.CORBA.Object;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import test.addressbook.model.GroupData;
@@ -20,7 +19,7 @@ public class TestModifyGroup extends TestBase {
 
         app.getGroupHelper().selectGroup(before.size() - 1);
         app.getGroupHelper().initGroupModification();
-        GroupData group = new GroupData("test1", "fixed2", null);
+        GroupData group = new GroupData(before.get(before.size() - 1).getId(), "test1", "fixed2", null);
         app.getGroupHelper().fillGroupForm(group);
         app.getGroupHelper().submitGroupModification();
         app.getGroupHelper().returnToGroupPage();
