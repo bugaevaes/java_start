@@ -1,21 +1,39 @@
 package test.addressbook.tests;
 
+import org.testng.Assert;
 import org.testng.annotations.Test;
 import test.addressbook.model.ContactData;
 import test.addressbook.model.GroupData;
+
+import java.util.List;
 
 public class TestModifyContact extends TestBase {
 
     @Test
     public void modifyContact() {
-        //app.getNavigationHelper().goToHomePage();
+        app.getNavigationHelper().goToHomePage();
         if (!app.getContactHelper().isThereAnyContact())
            app.getContactHelper().createContact(new ContactData("Анатолий", "Тестовый", "Тестовая улица, 1", null, "anatoliy@test.com", "test1"), true);
-        app.getNavigationHelper().goToHomePage();
-        app.getContactHelper().viewContactDetails();
+        //app.getNavigationHelper().goToHomePage();
+        List<ContactData> before = app.getContactHelper().getContactList();
+
+        app.getContactHelper().viewContactDetails(before.size() - 1);
         app.getContactHelper().initContactModification();
-        app.getContactHelper().fillContactData(new ContactData("Енотик", "Тестовый", null, "123456", "enot@test.com", null), false);
+        ContactData contact = new ContactData("Енотик", "Тестовый", null, "123456", "enot@test.com", null);
+        app.getContactHelper().fillContactData(contact, false);
         app.getContactHelper().submitContactModification();
         app.getNavigationHelper().goToHomePage();
+
+        List<ContactData> after = app.getContactHelper().getContactList();
+
+        Assert.assertEquals(after.size(), before.size());
+
+        before.remove(before.size() - 1);
+        before.add(contact);
+
+        before.sort((o1, o2) -> Integer.compare(o1.getId(), o2.getId()));
+        after.sort((o1, o2) -> Integer.compare(o1.getId(), o2.getId()));
+
+        Assert.assertEquals(before, after);
     }
 }
