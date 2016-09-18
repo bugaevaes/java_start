@@ -30,7 +30,11 @@ public class TestCreateGroup extends TestBase {
 
         group.setId(after.stream().max((o1, o2) -> Integer.compare(o1.getId(), o2.getId())).get().getId());
         before.add(group);
-        Assert.assertEquals(new HashSet<Object>(before), new HashSet<Object>(after));
+        before.sort((o1, o2) -> Integer.compare(o1.getId(), o2.getId()));
+        after.sort((o1, o2) -> Integer.compare(o1.getId(), o2.getId()));
+
+        Assert.assertEquals(before, after);
+        //Assert.assertEquals(new HashSet<Object>(before), new HashSet<Object>(after));
 
     }
 }
