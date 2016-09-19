@@ -10,6 +10,7 @@ public class TestDeleteContact extends TestBase{
 
     @Test
     public void deleteContact() {
+        app.getNavigationHelper().goToHomePage();
         if (!app.getContactHelper().isThereAnyContact())
             app.getContactHelper().createContact(new ContactData("Анатолий", "Тестовый", "Тестовая улица, 1", null, "anatoliy@test.com", "test1"), true);
 

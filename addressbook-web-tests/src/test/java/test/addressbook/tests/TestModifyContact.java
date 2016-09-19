@@ -3,7 +3,6 @@ package test.addressbook.tests;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import test.addressbook.model.ContactData;
-import test.addressbook.model.GroupData;
 
 import java.util.List;
 
@@ -14,9 +13,11 @@ public class TestModifyContact extends TestBase {
         app.getNavigationHelper().goToHomePage();
         if (!app.getContactHelper().isThereAnyContact())
            app.getContactHelper().createContact(new ContactData("Анатолий", "Тестовый", "Тестовая улица, 1", null, "anatoliy@test.com", "test1"), true);
-        //app.getNavigationHelper().goToHomePage();
+
+
         List<ContactData> before = app.getContactHelper().getContactList();
 
+        //app.getContactHelper().viewContactDetails(0);
         app.getContactHelper().viewContactDetails(before.size() - 1);
         app.getContactHelper().initContactModification();
         ContactData contact = new ContactData("Енотик", "Тестовый", null, "123456", "enot@test.com", null);
