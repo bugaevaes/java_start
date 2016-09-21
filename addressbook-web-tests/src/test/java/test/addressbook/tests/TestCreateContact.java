@@ -9,7 +9,7 @@ import java.util.List;
 
 public class TestCreateContact extends TestBase {
 
-    @Test
+    @Test(enabled = false)
     public void createContact() {
         app.getNavigationHelper().goToHomePage();
 
