@@ -14,7 +14,7 @@ public class TestDeleteGroup extends TestBase {
         app.getNavigationHelper().goToGroupPage();
         //if (!app.getGroupHelper().isThereAnyGroup())
         if (app.getGroupHelper().getGroupList().size() == 0)
-            app.getGroupHelper().createGroup(new GroupData("test1", null, "test3"));
+            app.getGroupHelper().createGroup(new GroupData().withName("test1").withFooter("test3"));
     }
 
     @Test

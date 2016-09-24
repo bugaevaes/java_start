@@ -13,15 +13,15 @@ public class TestModifyGroup extends TestBase {
     public void ensurePreconditions() {
         app.getNavigationHelper().goToGroupPage();
         if (app.getGroupHelper().getGroupList().size() == 0)
-        //if (!app.getGroupHelper().isThereAnyGroup())
-            app.getGroupHelper().createGroup(new GroupData("test1", null, "test3"));
+            //if (!app.getGroupHelper().isThereAnyGroup())
+            app.getGroupHelper().createGroup(new GroupData().withName("test1"));
     }
 
     @Test
     public void modifyGroup() {
         List<GroupData> before = app.getGroupHelper().getGroupList();
         int index = before.size() - 1;
-        GroupData group = new GroupData(before.get(index).getId(), "test123", "fixed2", null);
+        GroupData group = new GroupData().withId(before.get(index).getId()).withName("test123").withHeader("fixed2");
         app.getGroupHelper().modifyGroup(index, group);
 
         List<GroupData> after = app.getGroupHelper().getGroupList();
