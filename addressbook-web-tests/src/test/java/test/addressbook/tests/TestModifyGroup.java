@@ -6,34 +6,31 @@ import org.testng.annotations.Test;
 import test.addressbook.model.GroupData;
 
 import java.util.List;
+import java.util.Set;
 
 public class TestModifyGroup extends TestBase {
 
     @BeforeMethod
     public void ensurePreconditions() {
         app.getNavigationHelper().goToGroupPage();
-        if (app.getGroupHelper().getGroupList().size() == 0)
+        if (app.getGroupHelper().getAllGroups().size() == 0)
             //if (!app.getGroupHelper().isThereAnyGroup())
             app.getGroupHelper().createGroup(new GroupData().withName("test1"));
     }
 
     @Test
     public void modifyGroup() {
-        List<GroupData> before = app.getGroupHelper().getGroupList();
-        int index = before.size() - 1;
-        GroupData group = new GroupData().withId(before.get(index).getId()).withName("test123").withHeader("fixed2");
-        app.getGroupHelper().modifyGroup(index, group);
+        Set<GroupData> before = app.getGroupHelper().getAllGroups();
+        GroupData modifiedGroup = before.iterator().next();
+        GroupData group = new GroupData().withId(modifiedGroup.getId()).withName("test123").withHeader("fixed2");
+        app.getGroupHelper().modifyGroup(group);
 
-        List<GroupData> after = app.getGroupHelper().getGroupList();
+        Set<GroupData> after = app.getGroupHelper().getAllGroups();
 
         Assert.assertEquals(after.size(), before.size());
 
-        before.remove(index);
+        before.remove(modifiedGroup);
         before.add(group);
-
-        before.sort((o1, o2) -> Integer.compare(o1.getId(), o2.getId()));
-        after.sort((o1, o2) -> Integer.compare(o1.getId(), o2.getId()));
-
         Assert.assertEquals(before, after);
         //Assert.assertEquals(new HashSet<Object>(before), new HashSet<Object>(after));
 
