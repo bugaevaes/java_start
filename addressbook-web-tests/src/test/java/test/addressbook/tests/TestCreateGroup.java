@@ -5,6 +5,7 @@ import org.testng.annotations.Test;
 import test.addressbook.model.GroupData;
 
 import java.util.List;
+import java.util.Set;
 
 
 public class TestCreateGroup extends TestBase {
@@ -14,23 +15,18 @@ public class TestCreateGroup extends TestBase {
 
         app.getNavigationHelper().goToGroupPage();
 
-        List<GroupData> before = app.getGroupHelper().getGroupList();
+        Set<GroupData> before = app.getGroupHelper().getAllGroups();
         GroupData group = new GroupData().withName("test1").withFooter("test3");
 
         app.getGroupHelper().createGroup(group);
 
-        List<GroupData> after = app.getGroupHelper().getGroupList();
+        Set<GroupData> after = app.getGroupHelper().getAllGroups();
 
         Assert.assertEquals(after.size(), before.size() + 1);
 
-        group.withId(after.stream().max((o1, o2) -> Integer.compare(o1.getId(), o2.getId())).get().getId());
+        group.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt());
         before.add(group);
-        before.sort((o1, o2) -> Integer.compare(o1.getId(), o2.getId()));
-        after.sort((o1, o2) -> Integer.compare(o1.getId(), o2.getId()));
-
         Assert.assertEquals(before, after);
-        //Assert.assertEquals(new HashSet<Object>(before), new HashSet<Object>(after));
-
     }
 }
 
