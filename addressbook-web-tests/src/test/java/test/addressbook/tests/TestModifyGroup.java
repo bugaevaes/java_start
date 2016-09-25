@@ -1,12 +1,12 @@
 package test.addressbook.tests;
 
-import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import test.addressbook.model.GroupData;
+import test.addressbook.model.Groups;
 
-import java.util.List;
-import java.util.Set;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class TestModifyGroup extends TestBase {
 
@@ -14,28 +14,23 @@ public class TestModifyGroup extends TestBase {
     public void ensurePreconditions() {
         app.getNavigationHelper().goToGroupPage();
         if (app.getGroupHelper().getAllGroups().size() == 0)
-            //if (!app.getGroupHelper().isThereAnyGroup())
             app.getGroupHelper().createGroup(new GroupData().withName("test1"));
     }
 
     @Test
     public void modifyGroup() {
-        Set<GroupData> before = app.getGroupHelper().getAllGroups();
+        Groups before = app.getGroupHelper().getAllGroups();
         GroupData modifiedGroup = before.iterator().next();
         GroupData group = new GroupData().withId(modifiedGroup.getId()).withName("test123").withHeader("fixed2");
         app.getGroupHelper().modifyGroup(group);
 
-        Set<GroupData> after = app.getGroupHelper().getAllGroups();
+        Groups after = app.getGroupHelper().getAllGroups();
 
-        Assert.assertEquals(after.size(), before.size());
+        assertThat(after.size(), equalTo(before.size()));
 
-        before.remove(modifiedGroup);
-        before.add(group);
-        Assert.assertEquals(before, after);
-        //Assert.assertEquals(new HashSet<Object>(before), new HashSet<Object>(after));
+        assertThat(after, equalTo(before.without(modifiedGroup).withAdded(group)));
 
-
-    }
+   }
 
 }
 ;

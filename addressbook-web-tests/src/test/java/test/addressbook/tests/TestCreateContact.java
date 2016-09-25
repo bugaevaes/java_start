@@ -3,20 +3,21 @@ package test.addressbook.tests;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import test.addressbook.model.ContactData;
-import test.addressbook.model.GroupData;
 
 import java.util.List;
 
 public class TestCreateContact extends TestBase {
 
-    @Test(enabled = false)
+    @Test(enabled = true)
     public void createContact() {
         app.getNavigationHelper().goToHomePage();
 
         List<ContactData> before = app.getContactHelper().getContactList();
 
         app.getContactHelper().initContactCreation();
-        ContactData contact = new ContactData("Борис", "Тестовый", "Тестовая улица, 1", null, "boris@test.com", "test1");
+        ContactData contact = new ContactData()
+                .withName("Борис").withLastname("Тестовый")
+                .withAddress("Тестовая улица, 1").withEmail("boris@test.com").withGroup("test1");
         app.getContactHelper().fillContactData(contact, true);
         app.getContactHelper().submitContactCreation();
         app.getNavigationHelper().goToHomePage();
@@ -25,7 +26,7 @@ public class TestCreateContact extends TestBase {
 
         Assert.assertEquals(after.size(), before.size() + 1);
 
-        contact.setId(after.stream().max((o1, o2) -> Integer.compare(o1.getId(), o2.getId())).get().getId());
+        contact.withId(after.stream().max((o1, o2) -> Integer.compare(o1.getId(), o2.getId())).get().getId());
         before.add(contact);
         before.sort((o1, o2) -> Integer.compare(o1.getId(), o2.getId()));
         after.sort((o1, o2) -> Integer.compare(o1.getId(), o2.getId()));

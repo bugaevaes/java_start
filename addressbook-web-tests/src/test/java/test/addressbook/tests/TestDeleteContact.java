@@ -8,11 +8,13 @@ import java.util.List;
 
 public class TestDeleteContact extends TestBase{
 
-    @Test(enabled = false)
+    @Test(enabled = true)
     public void deleteContact() {
         app.getNavigationHelper().goToHomePage();
         if (!app.getContactHelper().isThereAnyContact())
-            app.getContactHelper().createContact(new ContactData("Анатолий", "Тестовый", "Тестовая улица, 1", null, "anatoliy@test.com", "test1"), true);
+            app.getContactHelper().createContact(new ContactData()
+                    .withName("Борис").withLastname("Тестовый")
+                    .withAddress("Тестовая улица, 1").withEmail("boris@test.com").withGroup("test1"), true);
 
         List<ContactData> before = app.getContactHelper().getContactList();
 
