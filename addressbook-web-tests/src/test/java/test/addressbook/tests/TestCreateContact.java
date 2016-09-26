@@ -1,10 +1,11 @@
 package test.addressbook.tests;
 
-import org.testng.Assert;
 import org.testng.annotations.Test;
 import test.addressbook.model.ContactData;
+import test.addressbook.model.Contacts;
 
-import java.util.List;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class TestCreateContact extends TestBase {
 
@@ -12,7 +13,7 @@ public class TestCreateContact extends TestBase {
     public void createContact() {
         app.getNavigationHelper().goToHomePage();
 
-        List<ContactData> before = app.getContactHelper().getContactList();
+        Contacts before = app.getContactHelper().getAllContacts();
 
         app.getContactHelper().initContactCreation();
         ContactData contact = new ContactData()
@@ -22,15 +23,11 @@ public class TestCreateContact extends TestBase {
         app.getContactHelper().submitContactCreation();
         app.getNavigationHelper().goToHomePage();
 
-        List<ContactData> after = app.getContactHelper().getContactList();
+        Contacts after = app.getContactHelper().getAllContacts();
 
-        Assert.assertEquals(after.size(), before.size() + 1);
+        assertThat(after.size(), equalTo(before.size() + 1));
+        //assertThat(after, equalTo(
+                //before.withAdded(contact.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
 
-        contact.withId(after.stream().max((o1, o2) -> Integer.compare(o1.getId(), o2.getId())).get().getId());
-        before.add(contact);
-        before.sort((o1, o2) -> Integer.compare(o1.getId(), o2.getId()));
-        after.sort((o1, o2) -> Integer.compare(o1.getId(), o2.getId()));
-
-        Assert.assertEquals(before, after);
-    }
+            }
 }

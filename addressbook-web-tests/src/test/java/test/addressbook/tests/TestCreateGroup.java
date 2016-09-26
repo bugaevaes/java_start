@@ -20,12 +20,11 @@ public class TestCreateGroup extends TestBase {
 
         app.getGroupHelper().createGroup(group);
 
-        //Groups after = app.getGroupHelper().getAllGroups();
+        Groups after = app.getGroupHelper().getAllGroups();
 
-        //assertThat(after.size(), equalTo(before.size() + 1));
-
-        //assertThat(after, equalTo(
-                //before.withAdded(group.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
+        assertThat(after.size(), equalTo(before.size() + 1));
+        assertThat(after, equalTo(
+                before.withAdded(group.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
     }
 }
 

@@ -6,8 +6,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import test.addressbook.model.ContactData;
+import test.addressbook.model.Contacts;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ContactHelper extends HelperBase {
@@ -30,28 +30,19 @@ public class ContactHelper extends HelperBase {
 
         if (creation) {
             new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
-        }
-
-        //if (isElementPresent(By.name("new_group"))) {
-        //new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());}
-        else {
+        } else {
             Assert.assertFalse(isElementPresent(By.name("new-group")));
 
         }
     }
 
-
     public void initContactCreation() {
         click(By.linkText("add new"));
     }
 
-    //public void viewContactDetails(int index) {
-    //wd.findElements(By.xpath("//table[@id='maintable']/tbody/tr[2]/td[7]/a/img")).get(index).click();}
-
     public void viewContactDetails(int index) {
         wd.findElements(By.cssSelector("img[alt=\"Details\"]")).get(index).click();
-        }
-
+    }
 
     public void initContactModification() {
         click(By.name("modifiy"));
@@ -71,13 +62,12 @@ public class ContactHelper extends HelperBase {
         submitContactCreation();
     }
 
-
     public boolean isThereAnyContact() {
         return isElementPresent(By.xpath("//table[@id='maintable']/tbody/tr[2]/td[7]/a"));
     }
 
-    public List<ContactData> getContactList() {
-        List<ContactData> contacts = new ArrayList<ContactData>();
+    public Contacts getAllContacts() {
+        Contacts contacts = new Contacts();
         List<WebElement> elements = wd.findElements(By.cssSelector("tr[name=\"entry\"]"));
         for (WebElement element : elements) {
             String firstName = element.findElements(By.cssSelector("td")).get(2).getText();
@@ -88,4 +78,5 @@ public class ContactHelper extends HelperBase {
         }
         return contacts;
     }
+
 }
