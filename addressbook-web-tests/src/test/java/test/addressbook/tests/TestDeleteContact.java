@@ -8,7 +8,7 @@ import test.addressbook.model.Contacts;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-public class TestDeleteContact extends TestBase{
+public class TestDeleteContact extends TestBase {
 
     @BeforeMethod
     public void ensurePreconditions() {
@@ -26,13 +26,12 @@ public class TestDeleteContact extends TestBase{
         Contacts before = app.getContactHelper().getAllContacts();
         ContactData deletedContact = before.iterator().next();
 
-        app.getNavigationHelper().goToHomePage();
-        app.getContactHelper().viewContactDetails(before.size() - 1);
-        app.getContactHelper().initContactModification();
-        app.getContactHelper().deleteContact();
+        app.getContactHelper().deleteContact(deletedContact);
+
         app.getNavigationHelper().goToHomePage();
 
         Contacts after = app.getContactHelper().getAllContacts();
+
         assertThat(after.size(), equalTo(before.size() - 1));
         assertThat(after, equalTo(before.without(deletedContact)));
 

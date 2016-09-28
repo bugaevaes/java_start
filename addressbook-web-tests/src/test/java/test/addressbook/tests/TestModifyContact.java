@@ -32,7 +32,7 @@ public class TestModifyContact extends TestBase {
         Contacts after = app.getContactHelper().getAllContacts();
 
         assertThat(after.size(), equalTo(before.size()));
-        //assertThat(after, equalTo(before.without(modifiedContact).withAdded(contact)));
+        assertThat(after, equalTo(before.without(modifiedContact).withAdded(contact)));
 
     }
 }
