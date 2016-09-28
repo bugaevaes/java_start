@@ -15,19 +15,18 @@ public class TestCreateContact extends TestBase {
 
         Contacts before = app.getContactHelper().getAllContacts();
 
-        app.getContactHelper().initContactCreation();
         ContactData contact = new ContactData()
                 .withName("Борис").withLastname("Тестовый")
                 .withAddress("Тестовая улица, 1").withEmail("boris@test.com").withGroup("test1");
-        app.getContactHelper().fillContactData(contact, true);
-        app.getContactHelper().submitContactCreation();
+
+        app.getContactHelper().createContact(contact, true);
         app.getNavigationHelper().goToHomePage();
 
         Contacts after = app.getContactHelper().getAllContacts();
 
         assertThat(after.size(), equalTo(before.size() + 1));
-        //assertThat(after, equalTo(
-                //before.withAdded(contact.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
+        assertThat(after, equalTo(
+                before.withAdded(contact.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
 
-            }
+    }
 }
