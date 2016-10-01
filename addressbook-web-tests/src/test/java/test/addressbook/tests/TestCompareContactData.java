@@ -3,12 +3,15 @@ package test.addressbook.tests;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import test.addressbook.model.ContactData;
-import test.addressbook.model.Contacts;
+
+import java.util.Arrays;
+import java.util.stream.Collectors;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-public class TestDeleteContact extends TestBase {
+
+public class TestCompareContactData extends TestBase {
 
     @BeforeMethod
     public void ensurePreconditions() {
@@ -21,21 +24,23 @@ public class TestDeleteContact extends TestBase {
         app.getNavigationHelper().goToHomePage();
     }
 
-    @Test(enabled = true)
-    public void deleteContact() {
-
-        Contacts before = app.getContactHelper().getAllContacts();
-        ContactData deletedContact = before.iterator().next();
-
-        app.getContactHelper().deleteContact(deletedContact);
-
+    @Test
+    public void testComparePhones() {
         app.getNavigationHelper().goToHomePage();
+        ContactData contact = app.getContactHelper().getAllContacts().iterator().next();
+        ContactData contactInfoFromEditPage = app.getContactHelper().infoFromEditPage(contact);
 
-        Contacts after = app.getContactHelper().getAllContacts();
+        assertThat(contact.getAllPhones(), equalTo(mergePhones(contactInfoFromEditPage)));
+    }
 
-        assertThat(after.size(), equalTo(before.size() - 1));
-        assertThat(after, equalTo(before.without(deletedContact)));
+    private String mergePhones(ContactData contact) {
+        return Arrays.asList(contact.getHomePhone(),contact.getMobilePhone(),contact.getWorkPhone())
+                .stream().filter((s) -> ! s.equals(""))
+                .map(TestCompareContactData::cleaned)
+                .collect(Collectors.joining("\n"));
+    }
 
+    public static String cleaned(String phone){
+        return phone.replaceAll("\\s", "").replaceAll("[-()]", "");
     }
 }
-

@@ -16,7 +16,8 @@ public class TestModifyContact extends TestBase {
         if (app.getContactHelper().getAllContacts().size() == 0)
             app.getContactHelper().createContact(new ContactData()
                     .withName("Борис").withLastname("Тестовый")
-                    .withAddress("Тестовая улица, 1").withEmail("boris@test.com").withGroup("test1"), true);
+                    .withAddress("Тестовая улица, 1").withEmail("boris@test.com").withGroup("test1")
+                    .withHomePhone("223344").withMobilePhone("+79630000000").withWorkPhone("112233"), true);
         app.getNavigationHelper().goToHomePage();
     }
 
@@ -24,7 +25,8 @@ public class TestModifyContact extends TestBase {
     public void modifyContact() {
         Contacts before = app.getContactHelper().getAllContacts();
         ContactData modifiedContact = before.iterator().next();
-        ContactData contact = new ContactData().withId(modifiedContact.getId()).withName("Енотик").withLastname("Тестовый").withPhone("123456")
+        ContactData contact = new ContactData().withId(modifiedContact.getId()).withName("Енотик").withLastname("Тестовый")
+                .withHomePhone("556677").withMobilePhone("89630000000").withWorkPhone("998877")
                 .withEmail("enot@test.com");
         app.getContactHelper().modifyContact(contact, false);
         app.getNavigationHelper().goToHomePage();

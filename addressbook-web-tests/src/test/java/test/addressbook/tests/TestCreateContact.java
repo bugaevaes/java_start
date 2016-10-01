@@ -17,7 +17,8 @@ public class TestCreateContact extends TestBase {
 
         ContactData contact = new ContactData()
                 .withName("Борис").withLastname("Тестовый")
-                .withAddress("Тестовая улица, 1").withEmail("boris@test.com").withGroup("test1");
+                .withAddress("Тестовая улица, 1").withEmail("boris@test.com").withGroup("test1")
+                .withHomePhone("223344").withMobilePhone("+79630000000").withWorkPhone("112233");
 
         app.getContactHelper().createContact(contact, true);
         app.getNavigationHelper().goToHomePage();
