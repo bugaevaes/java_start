@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-public class TestCompareContactData extends TestBase {
+public class TestCompareContactDataEditPage extends TestBase {
 
     @BeforeMethod
     public void ensurePreconditions() {
@@ -24,7 +24,7 @@ public class TestCompareContactData extends TestBase {
     }
 
     @Test
-    public void testComparePhones() {
+    public void testCompareDataEditPage() {
         app.getNavigationHelper().goToHomePage();
         ContactData contact = app.getContactHelper().getAllContacts().iterator().next();
         ContactData contactInfoFromEditPage = app.getContactHelper().infoFromEditPage(contact);
@@ -37,7 +37,7 @@ public class TestCompareContactData extends TestBase {
     private String mergePhones(ContactData contact) {
         return Arrays.asList(contact.getHomePhone(), contact.getMobilePhone(), contact.getWorkPhone())
                 .stream().filter((s) -> !s.equals(""))
-                .map(TestCompareContactData::cleaned)
+                .map(TestCompareContactDataEditPage::cleaned)
                 .collect(Collectors.joining("\n"));
     }
 

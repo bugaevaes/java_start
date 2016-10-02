@@ -43,7 +43,7 @@ public class ContactHelper extends HelperBase {
     }
 
     //public void viewContactDetails(int index) {
-        //wd.findElement(By.cssSelector("img[alt=\"Details\"]")).click();    }
+    //wd.findElement(By.cssSelector("img[alt=\"Details\"]")).click();    }
 
     private void viewContactDetailsById(int id) {
         wd.findElement(By.xpath("//a[@href = 'view.php?id=" + id + "' ]")).click();
@@ -72,7 +72,7 @@ public class ContactHelper extends HelperBase {
         initContactModification();
         fillContactData(contact, false);
         submitContactModification();
-            }
+    }
 
     public void deleteContact(ContactData contact) {
         viewContactDetailsById(contact.getId());
@@ -118,4 +118,12 @@ public class ContactHelper extends HelperBase {
                 .withEmail(email).withEmail2(email2).withEmail3(email3).withAddress(address);
 
     }
-}
+
+    public ContactData infoFromViewPage(ContactData contact) {
+        viewContactDetailsById(contact.getId());
+
+        return new ContactData().withId(contact.getId()).withName(firstName).withLastname(lastName)
+                .withHomePhone(homePhone).withMobilePhone(mobilePhone).withWorkPhone(workPhone)
+                .withEmail(email).withEmail2(email2).withEmail3(email3).withAddress(address);
+
+    }
