@@ -5,6 +5,9 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import test.addressbook.model.ContactData;
 
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -21,12 +24,20 @@ public class TestCompareContactDataViewPage extends TestBase {
         app.getNavigationHelper().goToHomePage();
     }
 
-    @Test(enabled = false)
+    @Test(enabled = true)
     public void testCompareDataViewPage() {
         ContactData contact = app.getContactHelper().getAllContacts().iterator().next();
-        ContactData contactInfoFromEditPage = app.getContactHelper().infoFromViewPage(contact);
+        ContactData contactInfoFromViewPage = app.getContactHelper().infoFromViewPage(contact);
 
-        assertThat(contact.getAllInfo(), equalTo(mergeInfo(contactInfoFromEditPage)));
+        assertThat(contactInfoFromViewPage.getFullNameAndAddress(), equalTo(mergeFullNameAndAddress(contact)));
+        assertThat(contactInfoFromViewPage.getAllEmails(), equalTo(contact.getAllEmails()));
+        assertThat(contactInfoFromViewPage.getAllPhones(), equalTo(contact.getAllPhones()));
+    }
+
+    private String mergeFullNameAndAddress(ContactData contact) {
+        return Arrays.asList(contact.getName() + " " + contact.getLastname(), contact.getAddress())
+                .stream().filter((s) -> !s.equals(""))
+                .collect(Collectors.joining("\n"));
     }
 }
 

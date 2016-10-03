@@ -121,9 +121,13 @@ public class ContactHelper extends HelperBase {
 
     public ContactData infoFromViewPage(ContactData contact) {
         viewContactDetailsById(contact.getId());
+        String blockData = wd.findElement(By.id("content")).getText();
+        String[] contactDataBlock= blockData.split("\\n\\n");
 
-        return new ContactData().withId(contact.getId()).withName(firstName).withLastname(lastName)
-                .withHomePhone(homePhone).withMobilePhone(mobilePhone).withWorkPhone(workPhone)
-                .withEmail(email).withEmail2(email2).withEmail3(email3).withAddress(address);
+        return new ContactData()
+                .withFullNameAndAddress(contactDataBlock[0])
+                .withAllPhones(contactDataBlock[1].replaceAll("[H:MW ]", ""))
+                .withAllEmails(contactDataBlock[2].replace(" (www.test.com)", ""));
 
     }
+}

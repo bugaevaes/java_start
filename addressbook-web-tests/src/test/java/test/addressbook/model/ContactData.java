@@ -13,6 +13,10 @@ public class ContactData {
     private String email2;
     private String email3;
     private String allEmails;
+    private String fullNameAndAddress;
+
+
+
     private String group;
 
     public ContactData withId(int id) {
@@ -80,6 +84,10 @@ public class ContactData {
         return this;
     }
 
+    public ContactData withFullNameAndAddress(String fullNameAndAddress) {
+        this.fullNameAndAddress = fullNameAndAddress;
+        return this;
+    }
 
     public int getId() {
         return id;
@@ -127,6 +135,10 @@ public class ContactData {
 
     public String getAllEmails() {  return allEmails;  }
 
+    public String getFullNameAndAddress() {
+        return fullNameAndAddress;
+    }
+
     @Override
     public String toString() {
         return "ContactData{" +
@@ -156,5 +168,6 @@ public class ContactData {
         result = 31 * result + (lastname != null ? lastname.hashCode() : 0);
         return result;
     }
+
 
 }
