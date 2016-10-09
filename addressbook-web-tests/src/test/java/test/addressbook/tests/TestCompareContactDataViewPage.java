@@ -24,7 +24,7 @@ public class TestCompareContactDataViewPage extends TestBase {
         app.getNavigationHelper().goToHomePage();
     }
 
-    @Test(enabled = true)
+    @Test(enabled = false)
     public void testCompareDataViewPage() {
         ContactData contact = app.getContactHelper().getAllContacts().iterator().next();
         ContactData contactInfoFromViewPage = app.getContactHelper().infoFromViewPage(contact);
