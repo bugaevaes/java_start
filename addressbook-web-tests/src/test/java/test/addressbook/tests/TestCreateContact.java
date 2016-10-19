@@ -43,7 +43,7 @@ public class TestCreateContact extends TestBase {
         //ContactData contact = new ContactData().withName("Евгений").withLastname("Тестовый").withAddress("Тестовая улица, 1")
         //.withEmail("evgeniy@test.com").withEmail2("evgeniy@test.com").withEmail3("evgeniy3@test.com")
         //.withGroup("test1").withHomePhone("223344").withMobilePhone("+79630000000").withWorkPhone("112233").withPhoto(photo);
-        app.getContactHelper().createContact(contact, false);
+        app.getContactHelper().createContact(contact, true);
         app.getNavigationHelper().goToHomePage();
 
         Contacts after = app.getContactHelper().getAllContacts();
