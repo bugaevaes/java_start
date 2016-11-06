@@ -16,7 +16,7 @@ public class DbConnectionTest {
         try {
             conn =
                     DriverManager.getConnection("jdbc:mysql://localhost:3306/addressbook?" +
-                            "user=root&password=" + "&serverTimezone=UTC");
+                            "user=root&password=" + "&serverTimezone=UTC" + "&useUnicode=true");
 
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery("select group_id, group_name, group_header from group_list");
