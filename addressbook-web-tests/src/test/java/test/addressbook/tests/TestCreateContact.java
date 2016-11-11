@@ -38,7 +38,8 @@ public class TestCreateContact extends TestBase {
     public void createContact(ContactData contact) {
         app.getNavigationHelper().goToHomePage();
 
-        Contacts before = app.getContactHelper().getAllContacts();
+//        Contacts before = app.getContactHelper().getAllContacts();
+        Contacts before = app.db().contacts();
         //File photo = new File("src/test/resources/enot.png");
         //ContactData contact = new ContactData().withName("Евгений").withLastname("Тестовый").withAddress("Тестовая улица, 1")
         //.withEmail("evgeniy@test.com").withEmail2("evgeniy@test.com").withEmail3("evgeniy3@test.com")
@@ -46,7 +47,8 @@ public class TestCreateContact extends TestBase {
         app.getContactHelper().createContact(contact, true);
         app.getNavigationHelper().goToHomePage();
 
-        Contacts after = app.getContactHelper().getAllContacts();
+//        Contacts after = app.getContactHelper().getAllContacts();
+        Contacts after = app.db().contacts();
 
         assertThat(after.size(), equalTo(before.size() + 1));
         assertThat(after, equalTo(

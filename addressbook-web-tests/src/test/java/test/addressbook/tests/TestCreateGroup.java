@@ -24,30 +24,33 @@ public class TestCreateGroup extends TestBase {
     @DataProvider
     public Iterator<Object[]> validGroups() throws IOException {
 
-       try(BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/groups.xml")))){
-           String xml = "";
-           String line = reader.readLine();
-           while (line != null) {
-               xml += line;
-               line = reader.readLine();
-           }
-           XStream xstream = new XStream();
-           xstream.processAnnotations(GroupData.class);
-           List<GroupData> groups = (List<GroupData>) xstream.fromXML(xml);
-           return groups.stream().map((g) -> new Object[] {g}).collect(Collectors.toList()).iterator();
-       }
+        try (BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/groups.xml")))) {
+            String xml = "";
+            String line = reader.readLine();
+            while (line != null) {
+                xml += line;
+                line = reader.readLine();
+            }
+            XStream xstream = new XStream();
+            xstream.processAnnotations(GroupData.class);
+            List<GroupData> groups = (List<GroupData>) xstream.fromXML(xml);
+            return groups.stream().map((g) -> new Object[]{g}).collect(Collectors.toList()).iterator();
+        }
     }
 
 
     @Test(dataProvider = "validGroups")
+
     public void createGroup(GroupData group) {
 
         app.getNavigationHelper().goToGroupPage();
 
-        Groups before = app.getGroupHelper().getAllGroups();
+        //        Groups before = app.getGroupHelper().getAllGroups();
+        Groups before = app.db().groups();
         app.getGroupHelper().createGroup(group);
 
-        Groups after = app.getGroupHelper().getAllGroups();
+        //        Groups after = app.getGroupHelper().getAllGroups();
+        Groups after = app.db().groups();
 
         assertThat(after.size(), equalTo(before.size() + 1));
         assertThat(after, equalTo(
