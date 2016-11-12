@@ -23,15 +23,17 @@ public class TestModifyGroup extends TestBase {
 //        Groups before = app.getGroupHelper().getAllGroups();
         Groups before = app.db().groups();
         GroupData modifiedGroup = before.iterator().next();
-        GroupData group = new GroupData().withId(modifiedGroup.getId()).withName("test123").withHeader("fixed2");
+        GroupData group = new GroupData().withId(modifiedGroup.getId()).withName("test123").withHeader("fixed2").withFooter("fixed3");
         app.getGroupHelper().modifyGroup(group);
 //        Groups after = app.getGroupHelper().getAllGroups();
         Groups after = app.db().groups();
 
         assertThat(after.size(), equalTo(before.size()));
         assertThat(after, equalTo(before.without(modifiedGroup).withAdded(group)));
+        verifyGroupsListFromUI();
 
-   }
+    }
+
 
 }
 ;
