@@ -43,7 +43,7 @@ public class ContactDataGenerator {
         for (int i = 0; i < count; i++){
             contacts.add(new ContactData().withName(String.format("Владимир%s", i))
                     .withLastname(String.format("Тестовый%s", i)).withAddress(String.format("Тестовая улица д.%s", i))
-            .withEmail(String.format("vladimir%s@ya.ru", i)).withHomePhone(String.format("123000%s", i)).withGroup("test 1"));
+            .withEmail(String.format("vladimir%s@ya.ru", i)).withHomePhone(String.format("123000%s", i)));
         }
         return contacts;
     }

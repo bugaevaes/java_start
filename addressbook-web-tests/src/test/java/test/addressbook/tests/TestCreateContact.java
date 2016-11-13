@@ -5,6 +5,8 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import test.addressbook.model.ContactData;
 import test.addressbook.model.Contacts;
+import test.addressbook.model.GroupData;
+import test.addressbook.model.Groups;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -30,12 +32,18 @@ public class TestCreateContact extends TestBase {
         }
         XStream xstream = new XStream();
         xstream.processAnnotations(ContactData.class);
+            Groups groups = app.db().groups();
         List<ContactData> contacts = (List<ContactData>) xstream.fromXML(xml);
+        contacts = contacts.stream().map((g) -> {
+            g.inGroup(groups.iterator().next());
+            return g;
+        }).collect(Collectors.toList());
         return contacts.stream().map((g) -> new Object[]{g}).collect(Collectors.toList()).iterator();}
     }
 
     @Test(dataProvider = "validContacts")
     public void createContact(ContactData contact) {
+        //Groups groups = app.db().groups();
         app.getNavigationHelper().goToHomePage();
 
 //        Contacts before = app.getContactHelper().getAllContacts();

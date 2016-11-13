@@ -4,6 +4,7 @@ package test.addressbook.tests;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import test.addressbook.model.ContactData;
+import test.addressbook.model.Groups;
 
 import java.util.Arrays;
 import java.util.stream.Collectors;
@@ -15,11 +16,13 @@ public class TestCompareContactDataViewPage extends TestBase {
 
     @BeforeMethod
     public void ensurePreconditions() {
+        Groups groups = app.db().groups();
         app.getNavigationHelper().goToHomePage();
         if (app.getContactHelper().getAllContacts().size() == 0)
             app.getContactHelper().createContact(new ContactData()
                     .withName("Борис").withLastname("Тестовый")
-                    .withAddress("Тестовая улица, 1").withEmail("boris@test.com").withGroup("test1")
+                    .withAddress("Тестовая улица, 1").withEmail("boris@test.com").
+                            inGroup(groups.iterator().next())
                     .withHomePhone("223344").withMobilePhone("+79630000000").withWorkPhone("112233"), true);
         app.getNavigationHelper().goToHomePage();
     }
