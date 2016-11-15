@@ -1,26 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<module external.linked.project.id="addressbook-web-tests" external.linked.project.path="$MODULE_DIR$/../../addressbook-web-tests" external.root.project.path="$MODULE_DIR$/../../addressbook-web-tests" external.system.id="GRADLE" external.system.module.group="" external.system.module.version="unspecified" type="JAVA_MODULE" version="4">
+<module external.linked.project.id="mantis-tests:test" external.linked.project.path="$MODULE_DIR$/../../mantis-tests" external.root.project.path="$MODULE_DIR$/../../mantis-tests" external.system.id="GRADLE" external.system.module.group="" external.system.module.type="sourceSet" external.system.module.version="unspecified" type="JAVA_MODULE" version="4">
   <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_8" inherit-compiler-output="false">
-    <output url="file://$MODULE_DIR$/../../addressbook-web-tests/build/classes/main" />
-    <output-test url="file://$MODULE_DIR$/../../addressbook-web-tests/build/classes/test" />
+    <output-test url="file://$MODULE_DIR$/../../mantis-tests/build/classes/test" />
     <exclude-output />
-    <content url="file://$MODULE_DIR$/../../addressbook-web-tests">
-      <sourceFolder url="file://$MODULE_DIR$/../../addressbook-web-tests/src/main/java" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/../../addressbook-web-tests/src/test/java" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/../../addressbook-web-tests/src/main/resources" type="java-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/../../addressbook-web-tests/src/test/resources" type="java-test-resource" />
-      <excludeFolder url="file://$MODULE_DIR$/../../addressbook-web-tests/.gradle" />
-      <excludeFolder url="file://$MODULE_DIR$/../../addressbook-web-tests/build" />
+    <content url="file://$MODULE_DIR$/../../mantis-tests/src/test">
+      <sourceFolder url="file://$MODULE_DIR$/../../mantis-tests/src/test/java" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/../../mantis-tests/src/test/resources" type="java-test-resource" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module" module-name="mantis-tests_main" />
     <orderEntry type="library" name="Gradle: org.testng:testng:6.9.10" level="project" />
-    <orderEntry type="library" name="Gradle: org.slf4j:slf4j-api:1.7.16" level="project" />
-    <orderEntry type="library" name="Gradle: ch.qos.logback:logback-core:1.1.5" level="project" />
-    <orderEntry type="library" name="Gradle: mysql:mysql-connector-java:6.0.5" level="project" />
-    <orderEntry type="library" name="Gradle: ch.qos.logback:logback-classic:1.1.5" level="project" />
-    <orderEntry type="library" name="Gradle: com.beust:jcommander:1.58" level="project" />
     <orderEntry type="library" name="Gradle: org.seleniumhq.selenium:selenium-java:2.53.1" level="project" />
+    <orderEntry type="library" name="Gradle: org.hamcrest:java-hamcrest:2.0.0.0" level="project" />
+    <orderEntry type="library" name="Gradle: com.beust:jcommander:1.48" level="project" />
     <orderEntry type="library" name="Gradle: org.beanshell:bsh:2.0b4" level="project" />
     <orderEntry type="library" name="Gradle: org.seleniumhq.selenium:selenium-chrome-driver:2.53.1" level="project" />
     <orderEntry type="library" name="Gradle: org.seleniumhq.selenium:selenium-edge-driver:2.53.1" level="project" />
@@ -61,24 +54,6 @@
     <orderEntry type="library" name="Gradle: org.eclipse.jetty.websocket:websocket-api:9.2.15.v20160210" level="project" />
     <orderEntry type="library" name="Gradle: org.apache.httpcomponents:httpclient:4.5.2" level="project" />
     <orderEntry type="library" name="Gradle: org.apache.httpcomponents:httpcore:4.4.4" level="project" />
-    <orderEntry type="library" name="Gradle: org.hamcrest:java-hamcrest:2.0.0.0" level="project" />
-    <orderEntry type="library" name="Gradle: com.thoughtworks.xstream:xstream:1.4.9" level="project" />
-    <orderEntry type="library" name="Gradle: xmlpull:xmlpull:1.1.3.1" level="project" />
-    <orderEntry type="library" name="Gradle: xpp3:xpp3_min:1.1.4c" level="project" />
-    <orderEntry type="library" name="Gradle: org.hibernate:hibernate-core:5.2.4.Final" level="project" />
-    <orderEntry type="library" name="Gradle: org.jboss.logging:jboss-logging:3.3.0.Final" level="project" />
-    <orderEntry type="library" name="Gradle: org.hibernate.javax.persistence:hibernate-jpa-2.1-api:1.0.0.Final" level="project" />
-    <orderEntry type="library" name="Gradle: org.javassist:javassist:3.20.0-GA" level="project" />
-    <orderEntry type="library" name="Gradle: antlr:antlr:2.7.7" level="project" />
-    <orderEntry type="library" name="Gradle: org.apache.geronimo.specs:geronimo-jta_1.1_spec:1.1.1" level="project" />
-    <orderEntry type="library" name="Gradle: org.jboss:jandex:2.0.0.Final" level="project" />
-    <orderEntry type="library" name="Gradle: com.fasterxml:classmate:1.3.0" level="project" />
-    <orderEntry type="library" name="Gradle: dom4j:dom4j:1.6.1" level="project" />
-    <orderEntry type="library" name="Gradle: org.hibernate.common:hibernate-commons-annotations:5.0.1.Final" level="project" />
-    <orderEntry type="library" name="Gradle: javax.enterprise:cdi-api:1.1" level="project" />
-    <orderEntry type="library" name="Gradle: javax.el:el-api:2.2" level="project" />
-    <orderEntry type="library" name="Gradle: org.jboss.spec.javax.interceptor:jboss-interceptors-api_1.1_spec:1.0.0.Beta1" level="project" />
-    <orderEntry type="library" name="Gradle: javax.annotation:jsr250-api:1.0" level="project" />
-    <orderEntry type="library" name="Gradle: javax.inject:javax.inject:1" level="project" />
   </component>
+  <component name="TestModuleProperties" production-module="mantis-tests_main" />
 </module>
